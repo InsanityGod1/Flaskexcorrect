@@ -1,0 +1,21 @@
+---
+- hosts: 172.20.241.255
+  remote_user: vargant
+  become: true
+  tasks:
+    - name: update
+      shell: apt update
+
+    - name: install
+      shell: apt install -y git python3-pip
+
+    - name: git clone
+      shell: git clone https://github.com/InsanityGod1/Flaskexcorrect.git
+
+    - name: pip install -r
+      shell: pip3 install -r /home/vagrant/Flaskexcorrect/requirements.txt
+
+    - name: python3 app.py
+      args:
+        chdir: /home/vagrant/Flaskexcorrect/
+      shell: nohup python3 app.py &
